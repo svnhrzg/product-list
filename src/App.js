@@ -250,7 +250,7 @@ function Filter({category, onSetCategory, order, onSetOrder, search, onSetSearch
         <div className="filter">
         <button className="clear-all" onClick={onClearAll}>Alle Filter aufheben</button>
       </div>
-      <div className="product-amount">{amount > 1 && `${amount} Produkte ` || amount === 0 && 'kein Produkt' || amount === 1 && '1 Produkt'} gefunden</div>
+      <div className="product-amount">{(amount > 1 && `${amount} Produkte `) || (amount === 0 && 'kein Produkt') || (amount === 1 && '1 Produkt')} gefunden</div>
     </div>
     </div>
   )
@@ -289,8 +289,8 @@ function Modal({ products, selectedProduct, onShowPrevImage, onShowNextImage }) 
     <div className="modal-wrapper">      
       <div className="modal-header">
         <h1>{products[selectedProduct].title}</h1>
-        <a href="#" className="prev" onClick={onShowPrevImage}></a>
-        <a href="#" className="next" onClick={onShowNextImage}></a>
+        <div className="prev" onClick={onShowPrevImage}></div>
+        <div className="next" onClick={onShowNextImage}></div>
       </div> 
     
       <div className="modal-product-image" style={{backgroundImage: `url(${products[selectedProduct].image})`}}></div>
