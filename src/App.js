@@ -130,7 +130,7 @@ function handleShowNextImage() {
 }
 
   if (category === "" || order === "") {
-    products = products;
+    products = products.slice();
   }
   if (category !== "") {
     products = products.slice().filter(product => (product.category === category))
