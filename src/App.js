@@ -98,6 +98,9 @@ export default function App() {
   const [order, setOrder] = useState("");
   const [search, setSearch] = useState("");
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
   function handleSetCategory(e) {
     setCategory(e.target.value);
   }
@@ -108,6 +111,23 @@ export default function App() {
     setSearch(e.target.value)
   }
 
+  function handleIsOpen() {
+    setIsOpen(is => !is);
+  }
+
+  function handleSelectedProduct(product) {
+    setSelectedProduct(product.id);
+  }
+
+  function handleShowPrevImage() {
+    if (selectedProduct === 0) {setSelectedProduct(products.length - 1)}
+    else {setSelectedProduct(selectedProduct - 1)}
+}
+
+function handleShowNextImage() {
+  if (selectedProduct === products.length - 1) {setSelectedProduct(0)}
+  else {setSelectedProduct(selectedProduct + 1)}
+}
 
   if (category === "" || order === "") {
     products = products;
@@ -137,69 +157,74 @@ export default function App() {
 
   return (
     <div className="app">
-      <Header />
-      <Filter category={category} onSetCategory={handleSetCategory} order={order} onSetOrder={handleSetOrder} search={search} onSetSearch={handleSetSearch} amount={amount} onClearAll={handleClearAll}/>
-      <ProductsList products={products} />
+      <Header onIsOpen={handleIsOpen} />
+      { !isOpen && (
+        <>
+        <Filter category={category} onSetCategory={handleSetCategory} order={order} onSetOrder={handleSetOrder} search={search} onSetSearch={handleSetSearch} amount={amount} onClearAll={handleClearAll}/>
+        <ProductsList products={products} onIsOpen={handleIsOpen} onSelectedProduct={handleSelectedProduct} />
+        </>
+        ) }
+     { isOpen && <Modal products={products} selectedProduct={selectedProduct} onShowPrevImage={handleShowPrevImage} onShowNextImage={handleShowNextImage} /> }
     </div>
   )
 }
 
-function Header() {
+function Header({onIsOpen}) {
   return (
     <header>
-      <div className="title"></div>
-      <div className="wrapper">
-        <div className ="add-product">
-        <h1>Produkte</h1>
-        {/* <FormAddProduct /> */}
+      <div className="title">
+        <div className="wrapper">
+          <h3 onClick={onIsOpen} >Genussmanufaktur</h3>
         </div>
       </div>
     </header>
   )
 }
 
-function FormAddProduct() {
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
+// function FormAddProduct() {
+//   const [title, setTitle] = useState("");
+//   const [image, setImage] = useState("");
 
-  function handleSubmit(e) {
-    e.preventDefault();
+//   function handleSubmit(e) {
+//     e.preventDefault();
 
-    if (!title || !image) return;
+//     if (!title || !image) return;
 
-    const id = crypto.randomUUID();
-    const newProduct = {
-      id, 
-      title,
-      image: `${image}?=${id}`,
-    };
+//     const id = crypto.randomUUID();
+//     const newProduct = {
+//       id, 
+//       title,
+//       image: `${image}?=${id}`,
+//     };
+//   };
 
-  };
+//   return (
+//     <div>
+//       <div><h2>Produkt hinzufügen</h2></div>
+//       <form className="form-add-product" onSubmit={handleSubmit}>
+//         <label>Titel</label>
+//         <input type="text" value={title} onChange={e => setTitle(e.target.value)}/>
+//         <label>Bild URL</label>
+//         <input type="text" value={image} onChange={e => setImage(e.target.value)}/>
+//         <Button>Hinzufügen</Button>
+//       </form> 
+//     </div>
 
-  return (
-    <div>
-      <div><h2>Produkt hinzufügen</h2></div>
-      <form className="form-add-product" onSubmit={handleSubmit}>
-        <label>Titel</label>
-        <input type="text" value={title} onChange={e => setTitle(e.target.value)}/>
-        <label>Bild URL</label>
-        <input type="text" value={image} onChange={e => setImage(e.target.value)}/>
-        <Button>Hinzufügen</Button>
-      </form> 
-    </div>
+//   )
+// }
 
-  )
-}
-
-function Button({children, onClick}) {
-  return <button className="button" onClick={onClick}>{children}</button>
-}
+// function Button({children, onClick}) {
+//   return <button className="button" onClick={onClick}>{children}</button>
+// }
 
 function Filter({category, onSetCategory, order, onSetOrder, search, onSetSearch, amount, onClearAll}) {
 
   return ( 
-    <div className="wrapper">
-    {/* <h2>Filter</h2> */}
+    <div className="wrapper main">
+      <div className ="add-product">
+        <h1>Torten & Kuchen</h1>
+        {/* <FormAddProduct /> */}
+      </div>
     <div className="filter-wrapper">
       <div className="filter">
         <label>Kategorie</label>
@@ -225,27 +250,27 @@ function Filter({category, onSetCategory, order, onSetOrder, search, onSetSearch
         <div className="filter">
         <button className="clear-all" onClick={onClearAll}>Alle Filter aufheben</button>
       </div>
-      <div className="product-amount">{amount > 1 && `${amount} Produkte ` || amount === 0 &&'kein Produkt' || amount === 1 && '1 Produkt'} gefunden</div>
+      <div className="product-amount">{amount > 1 && `${amount} Produkte ` || amount === 0 && 'kein Produkt' || amount === 1 && '1 Produkt'} gefunden</div>
     </div>
     </div>
   )
 }
 
-function ProductsList({products}) {
-  // const [products, setProducts] = useState(productsData);
-
+function ProductsList({products, onIsOpen, onSelectedProduct}) {
 return (
-  <ul className="products-list">
-    {products.map(product => (
-        <Product product={product} key={product.id} />
-    ))}
-  </ul>
+  <>
+    <ul className="products-list" onClick={onIsOpen}>
+      {products.map(product => (
+        <Product product={product} key={product.id} onSelectedProduct={onSelectedProduct}/>
+      ))}
+    </ul>
+  </>
 )
-}
 
-function Product({product}) {
+}
+function Product({product, onSelectedProduct}) {
 return (
-  <li className="product">
+  <li className="product" onClick={() => onSelectedProduct(product)}>
     <div className="product-image" style={{backgroundImage: `url(${product.image})`}}>
     </div>
     <div className="product-text">
@@ -255,4 +280,41 @@ return (
     </div>
   </li>
 )
+}
+
+function Modal({ products, selectedProduct, onShowPrevImage, onShowNextImage }) {
+
+  return (
+    <>
+    <div className="modal-wrapper">      
+      <div className="modal-header">
+        <h1>{products[selectedProduct].title}</h1>
+        <a href="#" className="prev" onClick={onShowPrevImage}></a>
+        <a href="#" className="next" onClick={onShowNextImage}></a>
+      </div> 
+    
+      <div className="modal-product-image" style={{backgroundImage: `url(${products[selectedProduct].image})`}}></div>
+
+    <div className="modal-product-info">
+
+      <div className="modal-product">
+        <label>Preis</label>
+        <div className="modal-product-price">€{products[selectedProduct].price} <span className="pax"> / {products[selectedProduct].pax} Personen</span>
+        </div>
+      </div>
+    
+    <div className="modal-product">
+      <label>Zutaten</label>
+      <div className="modal-product-ingredients">{products[selectedProduct].ingredients.join(", ")}</div>
+    </div>
+
+    <div className="modal-product">
+        <label>Anlass</label>
+        <div className="product-category">{products[selectedProduct].category}</div>
+      </div>
+
+    </div>
+    </div>
+    </>
+  )
 }
