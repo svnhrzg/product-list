@@ -1,7 +1,8 @@
 import { useState } from "react";
-import products from '../src/local-json/productsData.json'
+import productsData from '../src/local-json/productsData.json'
 
 export default function App() {
+  let products = productsData;
 
   const [category, setCategory] = useState("");
   const [order, setOrder] = useState("");
