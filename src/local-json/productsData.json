@@ -1,0 +1,202 @@
+[
+  {
+    "id": 0,
+    "title": "Schokolade-Himbeer",
+    "category": "Geburtstag",
+    "pax": 8,
+    "ingredients": [
+      "Dunkles Schokoladenmousse",
+      "Schokoladenbiskuit",
+      "Himbeer",
+      "dunkle Schokoladenglasur",
+      "Kakaobruch"
+    ],
+    "price": 60,
+    "image": "./images/0144.jpg"
+  },
+  {
+    "id": 1,
+    "title": "Kirsch Streuselkuchen",
+    "category": "Sonstiger Anlass",
+    "pax": 6,
+    "ingredients": [
+      "Kirschkompott",
+      "Frangipan",
+      "Streusel",
+      "Mürbeteig"
+    ],
+    "price": 40,
+    "image": "./images/8940.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Käsesahne-Himbeer",
+    "category": "Geburtstag",
+    "pax": 6,
+    "ingredients": [
+      "Käsesahnekrem",
+      "Vanillebiskuit",
+      "Himbeeren",
+      "Marzipan",
+      "Macaron"
+    ],
+    "price": 45,
+    "image": "./images/0389.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Cassiskrem",
+    "category": "Geburtstag",
+    "pax": 12,
+    "ingredients": [
+      "Cassis Butterkrem",
+      "Schokoladenbiskuit",
+      "Ganache",
+      "Marzipan",
+      "Brombeeren"
+    ],
+    "price": 90,
+    "image": "./images/0563.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Salzkaramell",
+    "category": "Geburtstag",
+    "pax": 16,
+    "ingredients": [
+      "Schokoladenbutterkrem",
+      "Schokoladenbiskuit",
+      "Salzkaramellkern"
+    ],
+    "price": 120,
+    "image": "./images/0851.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Vanillekrem",
+    "category": "Hochzeit",
+    "pax": 36,
+    "ingredients": [
+      "Vanillebutterkrem",
+      "Vanillebiskuit",
+      "Himbeerkern",
+      "Vanillemuffin",
+      "Himbeerbutterkrem",
+      "Fondant"
+    ],
+    "price": 250,
+    "image": "./images/9161.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Fraisier",
+    "category": "Geburtstag",
+    "pax": 6,
+    "ingredients": [
+      "Pistazienkrem",
+      "Erdbeeren",
+      "leichter Mandelbiskuit",
+      "Streusel",
+      "Marzipan"
+    ],
+    "price": 45,
+    "image": "./images/8921.jpg"
+  },
+  {
+    "id": 7,
+    "title": "St. Honoré",
+    "category": "Geburtstag",
+    "pax": 8,
+    "ingredients": [
+      "Crème Chiboust",
+      "Windbeutel",
+      "Blätterteig",
+      "Karamell"
+    ],
+    "price": 60,
+    "image": "./images/8726.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Ganachekrem",
+    "category": "Geburtstag",
+    "pax": 10,
+    "ingredients": [
+      "Ganachekrem",
+      "Schokoladenbiskuit",
+      "Macaron",
+      "Himbeeren"
+    ],
+    "price": 75,
+    "image": "./images/0721.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Himbeerkrem",
+    "category": "Geburtstag",
+    "pax": 12,
+    "ingredients": [
+      "Himbeerbutterkrem",
+      "Heller Biskuit",
+      "Fondant"
+    ],
+    "price": 120,
+    "image": "./images/0500.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Schokolade",
+    "category": "Sonstiger Anlass",
+    "pax": 12,
+    "ingredients": [
+      "Karamellmousse",
+      "Schokoladenbiskuit",
+      "dunkle Schokoladenglasur",
+      "Fondant"
+    ],
+    "price": 90,
+    "image": "./images/0327.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Schokolade-Pistazie",
+    "category": "Sonstiger Anlass",
+    "pax": 8,
+    "ingredients": [
+      "Pistazienkrem",
+      "Schokoladenkrem",
+      "Schokoladenbiskuit",
+      "Schokoladenglasur"
+    ],
+    "price": 60,
+    "image": "./images/0995.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Zuger Kirschtorte",
+    "category": "Sonstiger Anlass",
+    "pax": 16,
+    "ingredients": [
+      "Butterkrem",
+      "Japonai",
+      "heller Biskuit",
+      "Kirschwasser"
+    ],
+    "price": 96,
+    "image": "./images/8944.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Apfel Streuselkuchen",
+    "category": "Sonstiger Anlass",
+    "pax": 6,
+    "ingredients": [
+      "Apfelkompott",
+      "Frangipan",
+      "Streusel",
+      "Mürbeteig"
+    ],
+    "price": 40,
+    "image": "./images/8941.jpg"
+  }
+]
