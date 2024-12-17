@@ -347,6 +347,12 @@ select:focus {
 /* MEDIA QUERIES */
 
 @media (max-width: 720px) {
+  .wrapper,
+  .modal-wrapper {
+    width: auto;
+    margin-inline: 1.5rem;
+  }
+
   .filter-wrapper {
     grid-template-columns: 1fr;
   }
