@@ -186,7 +186,7 @@ return (
     <div className="product-text">
       <h3>{product.title}</h3>
       <div className="product-price">€{product.price} <span className="pax"> / {product.pax} Personen</span></div>
-      <span className="product-category">{product.category}</span>p
+      <span className="product-category">{product.category}</span>
     </div>
   </li>
 )
