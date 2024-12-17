@@ -167,7 +167,7 @@ h3 {
 
 .filter label {
   font-size: var(--fs-medium);
-  width: 6rem;
+  width: 5rem;
 }
 
 input[type='text'],
@@ -399,8 +399,14 @@ select:focus {
   }
 
   .title,
-  .modal-wrapper {
+  .modal-wrapper,
+  .add-product,
+  .filter,
+  .product-amount {
     padding-inline: 1rem;
   }
 
+  .filter {
+    gap: 1rem;
+  }
 }
