@@ -371,3 +371,19 @@ select:focus {
     right: 0rem;
   }
 }
+
+@media (max-width: 600px) {
+  .modal-header h1 {
+    font-size: var(--fs-medium);
+  }
+
+  .modal-product label {
+    font-size: var(--fs-body);
+  }
+
+  .modal-product-price,
+  .modal-product-ingredients {
+  font-size: var(--fs-body);
+  /* font-weight: 300; */
+  }
+}
