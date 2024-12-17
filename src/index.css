@@ -373,6 +373,10 @@ select:focus {
 }
 
 @media (max-width: 600px) {
+  .modal-product {
+    grid-template-columns: 1fr;
+  }
+  
   .modal-header h1 {
     font-size: var(--fs-medium);
   }
