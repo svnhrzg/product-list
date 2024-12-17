@@ -349,7 +349,7 @@ select:focus {
 @media (max-width: 720px) {
   .wrapper,
   .modal-wrapper {
-    width: auto;
+    width: 100%;
     margin-inline: 1.5rem;
   }
 
@@ -373,8 +373,10 @@ select:focus {
 }
 
 @media (max-width: 600px) {
+  .modal-product-info,
   .modal-product {
     grid-template-columns: 1fr;
+    width: 100%;
   }
   
   .modal-header h1 {
