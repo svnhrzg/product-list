@@ -2,7 +2,7 @@ import { useState } from "react";
 import productsData from '../src/local-json/productsData.json'
 
 export default function App() {
-  let products = productsData;
+  let products = [...productsData];
 
   const [category, setCategory] = useState("");
   const [order, setOrder] = useState("");
@@ -11,6 +11,8 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+
+  console.log(selectedProduct)
   function handleSetCategory(e) {
     setCategory(e.target.value);
   }
@@ -25,39 +27,27 @@ export default function App() {
     setIsOpen(is => !is);
   }
 
-  function handleSelectedProduct(product) {
-    setSelectedProduct(product.id);
-  }
-
-  function handleShowPrevImage() {
-    if (selectedProduct === 0) {setSelectedProduct(products.length - 1)}
-    else {setSelectedProduct(selectedProduct - 1)}
-}
-
-function handleShowNextImage() {
-  if (selectedProduct === products.length - 1) {setSelectedProduct(0)}
-  else {setSelectedProduct(selectedProduct + 1)}
-}
-
   if (category === "" || order === "") {
     products = products.slice();
   }
   if (category !== "") {
     products = products.slice().filter(product => (product.category === category))
   }
-
   if (order === "up") {
     products = products.slice().sort((a, b) => a.price - b.price);
   }
   if (order === "down") {
     products = products.slice().sort((a, b) => b.price - a.price);
   }
-
   if (search !== "") {
     products = products.slice().filter(product => product.title.toLowerCase().includes(search) || product.title.includes(search));
   }
 
   const amount = products.length;
+
+  function handleSelectedProduct(product) {
+    setSelectedProduct(product);
+  }
 
   function handleClearAll() {
     setCategory("");
@@ -67,24 +57,27 @@ function handleShowNextImage() {
 
   return (
     <div className="app">
-      <Header onIsOpen={handleIsOpen} />
+      <Header onIsOpen={handleIsOpen} isOpen={isOpen} selectedProduct={selectedProduct} />
       { !isOpen && (
         <>
-        <Filter category={category} onSetCategory={handleSetCategory} order={order} onSetOrder={handleSetOrder} search={search} onSetSearch={handleSetSearch} amount={amount} onClearAll={handleClearAll}/>
+        <Filter category={category} onSetCategory={handleSetCategory} order={order} onSetOrder={handleSetOrder} search={search} onSetSearch={handleSetSearch} amount={amount} onClearAll={handleClearAll} />
         <ProductsList products={products} onIsOpen={handleIsOpen} onSelectedProduct={handleSelectedProduct} />
         </>
         ) }
-     { isOpen && <Modal products={products} selectedProduct={selectedProduct} onShowPrevImage={handleShowPrevImage} onShowNextImage={handleShowNextImage} /> }
+     { isOpen && <Modal products={products} selectedProduct={selectedProduct} /> }
     </div>
   )
 }
 
-function Header({onIsOpen}) {
+function Header({onIsOpen, isOpen, selectedProduct}) {
   return (
     <header>
       <div className="title">
-        <div className="wrapper">
-          <h3 onClick={onIsOpen} >Genussmanufaktur</h3>
+        <div className="wrapper nav">
+          <h3>Genussmanufaktur</h3>
+          { selectedProduct && <div onClick={onIsOpen}>
+            <img src={isOpen ? "./icons/grid-view.svg" : "./icons/single-view.svg"} alt="toggle between views"></img>
+          </div>}
         </div>
       </div>
     </header>
@@ -127,12 +120,12 @@ function Header({onIsOpen}) {
 //   return <button className="button" onClick={onClick}>{children}</button>
 // }
 
-function Filter({category, onSetCategory, order, onSetOrder, search, onSetSearch, amount, onClearAll}) {
+function Filter({category, onSetCategory, order, onSetOrder, search, onSetSearch, amount, onClearAll }) {
 
   return ( 
     <div className="wrapper main">
       <div className ="add-product">
-        <h1>Torten & Kuchen</h1>
+        <h1>unsere Torten & Kuchen</h1>
         {/* <FormAddProduct /> */}
       </div>
     <div className="filter-wrapper">
@@ -192,35 +185,46 @@ return (
 )
 }
 
-function Modal({ products, selectedProduct, onShowPrevImage, onShowNextImage }) {
+function Modal({ products, selectedProduct }) {
+  const [currentProduct, setCurrentProduct] = useState(products.indexOf(selectedProduct))
+
+  function handleNext() {
+    if (currentProduct === products.length - 1) {setCurrentProduct(0)}
+    else {setCurrentProduct(currentProduct + 1)}
+  }
+
+  function handlePrev() {
+    if (currentProduct === 0) {setCurrentProduct(products.length - 1)}
+    else {setCurrentProduct(currentProduct - 1)}
+  }
 
   return (
     <>
     <div className="modal-wrapper">      
       <div className="modal-header">
-        <h1>{products[selectedProduct].title}</h1>
-        <div className="prev" onClick={onShowPrevImage}></div>
-        <div className="next" onClick={onShowNextImage}></div>
+        <h1>{products[currentProduct].title}</h1>
+        <div className="prev" onClick={handlePrev}></div>
+        <div className="next" onClick={handleNext}></div>
       </div> 
     
-      <div className="modal-product-image" style={{backgroundImage: `url(${products[selectedProduct].image})`}}></div>
+      <div className="modal-product-image" style={{backgroundImage: `url(${products[currentProduct].image})`}}></div>
 
     <div className="modal-product-info">
 
       <div className="modal-product">
         <label>Preis</label>
-        <div className="modal-product-price">€{products[selectedProduct].price} <span className="pax"> / {products[selectedProduct].pax} Personen</span>
+        <div className="modal-product-price">€{products[currentProduct].price} <span className="pax"> / {products[currentProduct].pax} Personen</span>
         </div>
       </div>
     
     <div className="modal-product">
       <label>Zutaten</label>
-      <div className="modal-product-ingredients">{products[selectedProduct].ingredients.join(", ")}</div>
+      <div className="modal-product-ingredients">{products[currentProduct].ingredients.join(", ")}</div>
     </div>
 
     <div className="modal-product">
         <label>Anlass</label>
-        <div className="product-category">{products[selectedProduct].category}</div>
+        <div className="product-category">{products[currentProduct].category}</div>
       </div>
 
     </div>
@@ -228,3 +232,4 @@ function Modal({ products, selectedProduct, onShowPrevImage, onShowNextImage }) 
     </>
   )
 }
+

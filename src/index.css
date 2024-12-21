@@ -116,6 +116,21 @@ button {
   margin-inline: auto;
 }
 
+header .nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .nav img {
+  height: 24px;
+  cursor: pointer;
+}
+
+header h3 {
+  pointer-events: none;
+}
+
 .add-product,
 .title {
   padding-block: 0.5rem;
@@ -409,4 +424,12 @@ select:focus {
   .filter {
     gap: 1rem;
   }
+
+  .prev, 
+.next {
+  padding: 0.75rem;
+}
+.prev {
+  right: 2.5rem;
+}
 }
