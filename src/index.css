@@ -394,7 +394,8 @@ select:focus {
     width: 100%;
   }
   
-  .modal-header h1 {
+  .modal-header h1,
+  .add-product h1 {
     font-size: var(--fs-medium);
   }
 
